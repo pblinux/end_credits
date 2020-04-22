@@ -1,6 +1,10 @@
 # end_credits
 
-A new Flutter package project.
+![end_credits](https://github.com/pblinux/end_credits/workflows/end_credits/badge.svg?branch=master)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/pblinux/end_credits)
+
+Show a simple end credits screen in your Flutter app.
 
 ## Getting Started
 
