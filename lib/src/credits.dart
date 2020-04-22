@@ -12,34 +12,47 @@ const int normalSpeedFactor = 30;
 ///Slow movement of credits
 const int slowSpeedFactor = 10;
 
+///Callback for scroll position
+typedef OnScrollChange = void Function(double);
+
 ///Widget that displays credits like a movie
 ///
 ///Moves a SingleScrollChildView from bottom to top
 ///and restarts the scrolling when reches the bottom.
 class EndCredits extends StatefulWidget {
   ///Background color
+  ///
+  ///Default: Black
   final Color backgroundColor;
 
   ///Curve of scrolling
+  ///
+  ///Default: linear
   final Curve curve;
 
   ///Delay to start the scrolling
+  ///
+  ///Default: zero
   final Duration delay;
 
   ///Sections of credtis
   final List<Section> sections;
 
-  ///Movement speed of credtis
+  ///Movement speed of credtis.
+  ///
+  ///Avaiable: fast (50), normal (30), slow (10).
   final int speedFactor;
 
+  ///Event for position change
+  final OnScrollChange onScrollChange;
+
   ///Main constructor
-  EndCredits(
-    this.sections, {
-    this.speedFactor = normalSpeedFactor,
-    this.curve = Curves.linear,
-    this.delay = Duration.zero,
-    this.backgroundColor = Colors.black,
-  });
+  EndCredits(this.sections,
+      {this.backgroundColor = Colors.black,
+      this.curve = Curves.linear,
+      this.delay = Duration.zero,
+      this.onScrollChange,
+      this.speedFactor = normalSpeedFactor});
 
   @override
   _EndCreditsState createState() => _EndCreditsState();
@@ -47,27 +60,29 @@ class EndCredits extends StatefulWidget {
 
 class _EndCreditsState extends State<EndCredits> {
   bool scroll = false;
+  Timer _restartTimer;
+  Timer _toogleTimer;
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    Timer(widget.delay, _toggle);
+    _toogleTimer = Timer(widget.delay, _toggle);
 
     ///When reachs the bottom, restart the scrolling
-    _scrollController.addListener(() {
-      if (_scrollController.offset >=
-              _scrollController.position.maxScrollExtent &&
-          !_scrollController.position.outOfRange) {
-        _scrollController.jumpTo(_scrollController.initialScrollOffset);
-        Timer(widget.delay, _scroll);
-      }
-    });
+    _scrollController.addListener(_onScrollChanged);
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScrollChanged);
     _scrollController.dispose();
+    if (_toogleTimer != null) {
+      _toogleTimer.cancel();
+    }
+    if (_restartTimer != null) {
+      _restartTimer.cancel();
+    }
     super.dispose();
   }
 
@@ -92,6 +107,16 @@ class _EndCreditsState extends State<EndCredits> {
                           for (var section in widget.sections)
                             SectionWidget(section)
                         ])))));
+  }
+
+  void _onScrollChanged() {
+    widget.onScrollChange(_scrollController.offset);
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      _scrollController.jumpTo(_scrollController.initialScrollOffset);
+      _restartTimer = Timer(widget.delay, _scroll);
+    }
   }
 
   void _toggle() {
