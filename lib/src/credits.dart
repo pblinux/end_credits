@@ -108,7 +108,7 @@ class _EndCreditsState extends State<EndCredits> {
             onTapUp: (details) => _toggle(),
             onTapCancel: _toggle,
             child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 controller: _scrollController,
                 child: Container(
                     padding: EdgeInsets.only(

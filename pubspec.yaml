@@ -1,7 +1,8 @@
 name: end_credits
-description: Show a simple end credits screen in your Flutter app.
-version: 1.0.0
-homepage: Pablo Bautista
+description: Show a simple and cinematic end credits screen in your Flutter app.
+version: 1.0.0+1
+homepage: https://github.com/pblinux/end_credits
+repository: https://github.com/pblinux/end_credits
 
 environment:
   sdk: ">=2.6.0 <3.0.0"

@@ -1,5 +1,6 @@
 # end_credits
 
+[![pub](https://img.shields.io/badge/pub-1.0.0+1-blue)](https://pub.dev/packages/end_credits)
 ![end_credits](https://github.com/pblinux/end_credits/workflows/end_credits/badge.svg?branch=master)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/pblinux/end_credits)
@@ -20,7 +21,7 @@ EndCredits(
 );
 ```
 
-You need to pass an arry as Sections:
+You need to pass an array of Section:
 ```dart
 Section(title: 'Cast', roles: [
     Role(name: 'Role 1', crew: [Responsable('John Doe')])
