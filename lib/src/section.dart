@@ -30,9 +30,7 @@ class SectionWidget extends StatefulWidget {
 
   ///Main constructor
   SectionWidget(this.section,
-      {this.responsableStyle = defaultResponsableStyle,
-      this.roleStyle = defaultRoleStyle,
-      this.titleStyle = defaultTitleStyle});
+      {this.responsableStyle, this.roleStyle, this.titleStyle});
 
   @override
   _SectionWidgetState createState() => _SectionWidgetState();
@@ -48,27 +46,31 @@ class _SectionWidgetState extends State<SectionWidget> {
           Text(widget.section.title, style: widget.titleStyle),
           SizedBox(height: 16.0),
           for (var role in widget.section.roles)
-            IntrinsicHeight(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                  Expanded(
-                    child: Text(role.name,
-                        style: widget.roleStyle, textAlign: TextAlign.end),
-                  ),
-                  SizedBox(width: 16.0),
-                  Expanded(
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                        for (var person in role.crew)
-                          Text(person.name,
-                              style: widget.responsableStyle,
-                              textAlign: TextAlign.start)
-                      ]))
-                ]))
+            Container(
+              margin: EdgeInsets.only(bottom: role.crew.length > 1 ? 8.0 : 0.0),
+              child: IntrinsicHeight(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                    Expanded(
+                        child: Text(role.name,
+                            style: widget.roleStyle, textAlign: TextAlign.end)),
+                    SizedBox(width: 16.0),
+                    Expanded(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                          for (var person in role.crew)
+                            Container(
+                                margin: const EdgeInsets.only(bottom: 4.0),
+                                child: Text(person.name,
+                                    style: widget.responsableStyle,
+                                    textAlign: TextAlign.start))
+                        ]))
+                  ])),
+            )
         ]));
   }
 }

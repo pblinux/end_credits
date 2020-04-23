@@ -32,24 +32,27 @@ class _EndCreditsAppState extends State<EndCreditsApp> {
             key: Key('scaffold'),
             body: EndCredits([
               Section(title: 'Cast', roles: [
-                Role(name: 'Role 1', crew: [Responsable('John Doe')])
+                Role(name: 'Role 1', crew: [Responsable('John Doe')]),
+                Role(name: 'Role 2', crew: [Responsable('John Doe')]),
+                Role(name: 'Role 3', crew: [Responsable('John Doe')]),
+                Role(name: 'Role 4', crew: [Responsable('John Doe')]),
+                Role(name: 'Role 5', crew: [Responsable('John Doe')]),
               ]),
-              Section(title: 'Other', roles: [
-                Role(
-                    name: 'Role 2',
-                    crew: [Responsable('John Doe'), Responsable('John Doe')])
-              ]),
-              Section(title: 'Other', roles: [
-                Role(name: 'Role 3', crew: [
-                  Responsable('John Doeeeeeeeeee'),
+              Section(title: 'Producers', roles: [
+                Role(name: 'Executive producer', crew: [
+                  Responsable('John Doe'),
+                  Responsable('John Doe'),
+                  Responsable('John Doe')
+                ]),
+                Role(name: 'Producer', crew: [
                   Responsable('John Doe'),
                   Responsable('John Doe'),
                   Responsable('John Doe')
                 ])
               ]),
               Section(title: 'Other', roles: [
-                Role(name: 'Role 44444444455555555555555555555', crew: [
-                  Responsable('John Doeeeeeeeeeeeeeeeeeeeeeeeeee'),
+                Role(name: 'Role', crew: [
+                  Responsable('John Doe'),
                   Responsable('John Doe'),
                   Responsable('John Doe'),
                   Responsable('John Doe')

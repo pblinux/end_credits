@@ -10,5 +10,12 @@
             "request": "launch",
             "program": "./example/lib/main.dart"
         },
+        {
+            "name": "Run example - profile",
+            "type": "dart",
+            "flutterMode": "profile",
+            "request": "launch",
+            "program": "./example/lib/main.dart"
+        },
     ]
 }

@@ -26,36 +26,34 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: EndCredits(
-      [
-        Section(title: 'Cast', roles: [
-          Role(name: 'Role 1', crew: [Responsable('John Doe')])
+        body: EndCredits([
+      Section(title: 'Cast', roles: [
+        Role(name: 'Role 1', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 2', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 3', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 4', crew: [Responsable('John Doe')]),
+        Role(name: 'Role 5', crew: [Responsable('John Doe')]),
+      ]),
+      Section(title: 'Producers', roles: [
+        Role(name: 'Executive producer', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
         ]),
-        Section(title: 'Other', roles: [
-          Role(
-              name: 'Role 2',
-              crew: [Responsable('John Doe'), Responsable('John Doe')])
-        ]),
-        Section(title: 'Other', roles: [
-          Role(name: 'Role 3', crew: [
-            Responsable('John Doeeeeeeeeee'),
-            Responsable('John Doe'),
-            Responsable('John Doe'),
-            Responsable('John Doe')
-          ])
-        ]),
-        Section(title: 'Other', roles: [
-          Role(name: 'Role 44444444455555555555555555555', crew: [
-            Responsable('John Doeeeeeeeeeeeeeeeeeeeeeeeeee'),
-            Responsable('John Doe'),
-            Responsable('John Doe'),
-            Responsable('John Doe')
-          ])
+        Role(name: 'Producer', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
         ])
-      ],
-      onScrollChange: (offset) {
-        print(offset);
-      },
-    ));
+      ]),
+      Section(title: 'Other', roles: [
+        Role(name: 'Role', crew: [
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe'),
+          Responsable('John Doe')
+        ])
+      ])
+    ]));
   }
 }

@@ -46,13 +46,25 @@ class EndCredits extends StatefulWidget {
   ///Event for position change
   final OnScrollChange onScrollChange;
 
+  ///Responsable text style
+  final TextStyle responsableTextStyle;
+
+  ///Role text style
+  final TextStyle roleTextStyle;
+
+  ///Section title style
+  final TextStyle titleTextStyle;
+
   ///Main constructor
   EndCredits(this.sections,
       {this.backgroundColor = Colors.black,
       this.curve = Curves.linear,
       this.delay = Duration.zero,
       this.onScrollChange,
-      this.speedFactor = normalSpeedFactor});
+      this.responsableTextStyle = defaultResponsableStyle,
+      this.roleTextStyle = defaultRoleStyle,
+      this.speedFactor = normalSpeedFactor,
+      this.titleTextStyle = defaultTitleStyle});
 
   @override
   _EndCreditsState createState() => _EndCreditsState();
@@ -96,6 +108,7 @@ class _EndCreditsState extends State<EndCredits> {
             onTapUp: (details) => _toggle(),
             onTapCancel: _toggle,
             child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
                 controller: _scrollController,
                 child: Container(
                     padding: EdgeInsets.only(
@@ -105,12 +118,17 @@ class _EndCreditsState extends State<EndCredits> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           for (var section in widget.sections)
-                            SectionWidget(section)
+                            SectionWidget(section,
+                                responsableStyle: widget.responsableTextStyle,
+                                roleStyle: widget.roleTextStyle,
+                                titleStyle: widget.titleTextStyle)
                         ])))));
   }
 
   void _onScrollChanged() {
-    widget.onScrollChange(_scrollController.offset);
+    if (widget.onScrollChange != null) {
+      widget.onScrollChange(_scrollController.offset);
+    }
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
