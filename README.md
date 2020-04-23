@@ -6,13 +6,35 @@
 
 Show a simple end credits screen in your Flutter app.
 
+<img src="https://raw.githubusercontent.com/pblinux/end_credits/master/images/end_credits.gif" alt="drawing" style="width:200px;"/>
+
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```dart
+EndCredits(
+    sections,
+    backgroundColor: Colors.black,
+    curve: Curves.linear,
+    delay: Duration(seconds: 1),
+    speedFactor: normalSpeedFactor,
+);
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+You need to pass an arry as Sections:
+```dart
+Section(title: 'Cast', roles: [
+    Role(name: 'Role 1', crew: [Responsable('John Doe')])
+])
+```
+
+You can customize the text style of:
+- Section
+- Crew
+- Role
+
+There are 3 predefined speed factors, but you can pass a custom `double` value
+- Slow
+- Normal
+- Fast
+
+
