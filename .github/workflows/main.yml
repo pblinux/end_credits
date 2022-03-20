@@ -13,9 +13,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: subosito/flutter-action@v2
-      - name: generate coverage
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.5.3
+      - name: get dependencies
+        run: flutter packages get
+      - name: run tests
         run: flutter test --no-pub --coverage
       - name: upload coverage
         uses: codecov/codecov-action@v2
