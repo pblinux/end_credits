@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:end_credits/src/models.dart';
+import 'package:end_credits/src/section.dart';
 import 'package:flutter/material.dart';
-import 'models.dart';
-import 'section.dart';
 
 ///Fast movement of credits
 const int fastSpeedFactor = 50;
@@ -20,6 +20,20 @@ typedef OnScrollChange = void Function(double);
 ///Moves a SingleScrollChildView from bottom to top
 ///and restarts the scrolling when reches the bottom.
 class EndCredits extends StatefulWidget {
+  ///Main constructor
+  const EndCredits(
+    this.sections, {
+    Key? key,
+    this.backgroundColor = Colors.black,
+    this.curve = Curves.linear,
+    this.delay = Duration.zero,
+    this.onScrollChange,
+    this.responsableTextStyle = defaultResponsableStyle,
+    this.roleTextStyle = defaultRoleStyle,
+    this.speedFactor = normalSpeedFactor,
+    this.titleTextStyle = defaultTitleStyle,
+  }) : super(key: key);
+
   ///Background color
   ///
   ///Default: Black
@@ -44,7 +58,7 @@ class EndCredits extends StatefulWidget {
   final int speedFactor;
 
   ///Event for position change
-  final OnScrollChange onScrollChange;
+  final OnScrollChange? onScrollChange;
 
   ///Responsable text style
   final TextStyle responsableTextStyle;
@@ -55,25 +69,15 @@ class EndCredits extends StatefulWidget {
   ///Section title style
   final TextStyle titleTextStyle;
 
-  ///Main constructor
-  EndCredits(this.sections,
-      {this.backgroundColor = Colors.black,
-      this.curve = Curves.linear,
-      this.delay = Duration.zero,
-      this.onScrollChange,
-      this.responsableTextStyle = defaultResponsableStyle,
-      this.roleTextStyle = defaultRoleStyle,
-      this.speedFactor = normalSpeedFactor,
-      this.titleTextStyle = defaultTitleStyle});
-
   @override
-  _EndCreditsState createState() => _EndCreditsState();
+  State<EndCredits> createState() => _EndCreditsState();
 }
 
 class _EndCreditsState extends State<EndCredits> {
   bool scroll = false;
-  Timer _restartTimer;
-  Timer _toogleTimer;
+  Timer? _restartTimer;
+  late Timer _toogleTimer;
+
   final _scrollController = ScrollController();
 
   @override
@@ -87,13 +91,12 @@ class _EndCreditsState extends State<EndCredits> {
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScrollChanged);
-    _scrollController.dispose();
-    if (_toogleTimer != null) {
-      _toogleTimer.cancel();
-    }
+    _scrollController
+      ..removeListener(_onScrollChanged)
+      ..dispose();
+    _toogleTimer.cancel();
     if (_restartTimer != null) {
-      _restartTimer.cancel();
+      _restartTimer!.cancel();
     }
     super.dispose();
   }
@@ -101,33 +104,40 @@ class _EndCreditsState extends State<EndCredits> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: widget.backgroundColor,
-        constraints: BoxConstraints.expand(),
-        child: GestureDetector(
-            onTapDown: (details) => _toggle(),
-            onTapUp: (details) => _toggle(),
-            onTapCancel: _toggle,
-            child: SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                controller: _scrollController,
-                child: Container(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height,
-                        bottom: MediaQuery.of(context).size.height),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          for (var section in widget.sections)
-                            SectionWidget(section,
-                                responsableStyle: widget.responsableTextStyle,
-                                roleStyle: widget.roleTextStyle,
-                                titleStyle: widget.titleTextStyle)
-                        ])))));
+      color: widget.backgroundColor,
+      constraints: const BoxConstraints.expand(),
+      child: GestureDetector(
+        onTapDown: (details) => _toggle(),
+        onTapUp: (details) => _toggle(),
+        onTapCancel: _toggle,
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _scrollController,
+          child: Container(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height,
+              bottom: MediaQuery.of(context).size.height,
+            ),
+            child: Column(
+              children: <Widget>[
+                for (var section in widget.sections)
+                  SectionWidget(
+                    section,
+                    responsableStyle: widget.responsableTextStyle,
+                    roleStyle: widget.roleTextStyle,
+                    titleStyle: widget.titleTextStyle,
+                  )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void _onScrollChanged() {
     if (widget.onScrollChange != null) {
-      widget.onScrollChange(_scrollController.offset);
+      widget.onScrollChange?.call(_scrollController.offset);
     }
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
@@ -142,8 +152,11 @@ class _EndCreditsState extends State<EndCredits> {
     if (scroll) {
       _scroll();
     } else {
-      _scrollController.animateTo(_scrollController.offset,
-          duration: Duration.zero, curve: widget.curve);
+      _scrollController.animateTo(
+        _scrollController.offset,
+        duration: Duration.zero,
+        curve: widget.curve,
+      );
     }
   }
 
@@ -154,8 +167,10 @@ class _EndCreditsState extends State<EndCredits> {
     final durationDouble = distanceDifference / widget.speedFactor;
 
     ///Move to end of scroll
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        duration: Duration(seconds: durationDouble.toInt()),
-        curve: widget.curve);
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: durationDouble.toInt()),
+      curve: widget.curve,
+    );
   }
 }

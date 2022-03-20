@@ -1,9 +1,9 @@
 # end_credits
 
-[![pub](https://img.shields.io/badge/pub-1.0.0+1-blue)](https://pub.dev/packages/end_credits)
+[![pub](https://img.shields.io/badge/pub-2.0.0-blue)](https://pub.dev/packages/end_credits)
 ![end_credits](https://github.com/pblinux/end_credits/workflows/end_credits/badge.svg?branch=master)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://github.com/pblinux/end_credits)
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://github.com/pblinux/end_credits)
 
 Show a simple end credits screen in your Flutter app.
 
