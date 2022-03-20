@@ -2,6 +2,7 @@
 
 [![pub](https://img.shields.io/badge/pub-2.0.0-blue)](https://pub.dev/packages/end_credits)
 ![end_credits](https://github.com/pblinux/end_credits/workflows/end_credits/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/pblinux/end_credits/branch/master/graph/badge.svg?token=T4X46VDOGA)](https://codecov.io/gh/pblinux/end_credits)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://github.com/pblinux/end_credits)
 
