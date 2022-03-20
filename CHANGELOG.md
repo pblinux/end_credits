@@ -1,3 +1,6 @@
+## [2.0.0]
+* Sound null safety
+
 ## [1.0.0+1]
 * Format classes and better description
 

@@ -1,11 +1,11 @@
 name: end_credits
 description: Show a simple and cinematic end credits screen in your Flutter app.
-version: 1.0.0+1
+version: 2.0.0
 homepage: https://github.com/pblinux/end_credits
 repository: https://github.com/pblinux/end_credits
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -14,10 +14,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  effective_dart: ^1.2.0
+  very_good_analysis: ^2.4.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
